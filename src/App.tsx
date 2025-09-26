@@ -70,13 +70,13 @@ function ExportToolbar() {
   };
 
   const exportMJML = () => {
-    const mjml = JsonToMjml({ data: values.content, mode: 'production', context: null });
+    const mjml = JsonToMjml({ data: values.content, mode: 'production', context: undefined });
 
     download('template.mjml', mjml, 'application/xml');
   };
 
   const exportHTML = () => {
-    const mjml = JsonToMjml({ data: values.content, mode: 'production', context: null });
+    const mjml = JsonToMjml({ data: values.content, mode: 'production', context: undefined });
     const { html, errors } = mjml2html(mjml, { minify: true });
 
     if (errors?.length) {
@@ -92,7 +92,7 @@ function ExportToolbar() {
   };
 
   const previewHTML = () => {
-    const mjml = JsonToMjml({ data: values.content, mode: 'production', context: null });
+    const mjml = JsonToMjml({ data: values.content, mode: 'production', context: undefined });
     const { html } = mjml2html(mjml);
     const w = window.open('', '_blank');
     if (w) {

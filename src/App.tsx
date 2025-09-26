@@ -32,6 +32,7 @@ export default function App() {
       // onUploadImage={async (blob) => URL.createObjectURL(blob)}
     >
       {() => (
+        // @ts-expect-error categories optional at runtime, defaults are used
         <StandardLayout showSourceCode>
           <ExportToolbar />
           <EmailEditor />

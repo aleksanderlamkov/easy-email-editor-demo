@@ -2,6 +2,7 @@ import 'easy-email-editor/lib/style.css';
 import 'easy-email-extensions/lib/style.css';
 import '@arco-themes/react-easy-email-theme/css/arco.css';
 
+import * as React from 'react'
 import { useMemo } from 'react'
 import { BlockManager, BasicType, JsonToMjml } from 'easy-email-core';
 import { EmailEditor, EmailEditorProvider, useEditorContext } from 'easy-email-editor';

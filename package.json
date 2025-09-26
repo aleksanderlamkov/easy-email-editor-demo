@@ -1,0 +1,45 @@
+{
+  "name": "easy-email-editor-demo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@arco-design/web-react": "^2.66.5",
+    "@arco-themes/react-easy-email-theme": "^0.0.3",
+    "easy-email-core": "^4.16.4",
+    "easy-email-editor": "^4.16.3",
+    "easy-email-extensions": "^4.16.4",
+    "mjml-browser": "^4.16.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-final-form": "^7.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/mjml-browser": "^4.15.0",
+    "@types/react": "^18.3.24",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.7.0",
+    "babel-plugin-react-compiler": "^19.1.0-rc.3",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.4.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.44.0",
+    "vite": "^5.4.20"
+  },
+  "packageManager": "pnpm@9.1.1+sha1.09ada6cd05003e0ced25fb716f9fda4063ec2e3b",
+  "pnpm": {
+    "overrides": {
+      "react": "18.2.0",
+      "react-dom": "18.2.0"
+    }
+  }
+}

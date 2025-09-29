@@ -75,6 +75,59 @@ const EditorToolbar = (props: EditorToolbarProps) => {
     }
   }
 
+  // 🔥 НОВОЕ: глубокий поиск активного элемента (учитывает Shadow DOM)
+  const getDeepActiveElement = (): Element | null => {
+    let el: any = document.activeElement;
+    while (el && el.shadowRoot && el.shadowRoot.activeElement) {
+      el = el.shadowRoot.activeElement;
+    }
+    return el ?? null;
+  };
+
+// 🔥 НОВОЕ: вставка в курсор текущего contenteditable внутри его шадоу-рута
+  const insertAtCursor = (text: string) => {
+    const active = getDeepActiveElement() as HTMLElement | null;
+    if (!active || !active.isContentEditable) {
+      alert('Курсор не находится внутри текстового блока');
+      return;
+    }
+
+    // selection нужно брать из корневого узла этого элемента (ShadowRoot или Document)
+    const root = (active.getRootNode && active.getRootNode()) || document;
+    const sel =
+      (root as ShadowRoot).getSelection?.() ??
+      (root as Document).getSelection?.() ??
+      window.getSelection();
+
+    if (!sel) {
+      alert('Курсор не находится внутри текстового блока');
+      return;
+    }
+
+    // если вдруг нет диапазона — поставим каретку в конец active
+    if (sel.rangeCount === 0) {
+      const r = document.createRange();
+      r.selectNodeContents(active);
+      r.collapse(false);
+      sel.addRange(r);
+    }
+
+    // пробуем нативно
+    const ok = document.execCommand && document.execCommand('insertText', false, text);
+    if (ok) return;
+
+    // фоллбэк через Range
+    const range = sel.getRangeAt(0);
+    range.deleteContents();
+    const node = document.createTextNode(text);
+    range.insertNode(node);
+    range.setStartAfter(node);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  };
+
+
   return (
     <div style={{
       padding: 8,
@@ -107,8 +160,10 @@ const EditorToolbar = (props: EditorToolbarProps) => {
           {variables.map(({ key, sample, name }) => (
             <button
               key={key}
+              type="button"
               title={`Копировать {{${key}}} (${sample})`}
-              onClick={() => copyVar(key)}
+              onMouseDown={(e) => { e.preventDefault(); insertAtCursor(`{{${key}}}`); }}
+              onClick={(e) => e.preventDefault()}
             >
               {name}
             </button>

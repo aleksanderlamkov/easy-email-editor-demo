@@ -1,8 +1,4 @@
-export type TVariable = {
-  key: string
-  name: string
-  sample: string
-}
+import type { TVariable } from './ui/VarsInsertion'
 
 export type EditorToolbarProps = {
   variables?: TVariable[]

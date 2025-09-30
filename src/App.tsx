@@ -1,5 +1,5 @@
 import Editor, { type EasyEmailValues } from './components/Editor'
-import myTemplateJson from './fixtures/test.json';
+import myTemplateJson from './fixtures/test.json'
 import type { TVariable } from './components/Editor/ui/EditorToolbar'
 
 const VARIABLES: TVariable[] = [

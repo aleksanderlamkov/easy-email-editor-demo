@@ -1,0 +1,14 @@
+.root {
+  padding: 12px;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-block: 0;
+  padding-left: 0;
+  list-style: none;
+}

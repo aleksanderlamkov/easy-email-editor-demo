@@ -1,0 +1,15 @@
+.root {
+  display: grid;
+  row-gap: 8px;
+  padding: 12px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-block: 0;
+  padding-left: 0;
+  list-style: none;
+}

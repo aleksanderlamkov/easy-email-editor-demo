@@ -8,7 +8,7 @@ import {
   EmailEditorProvider,
 } from 'easy-email-editor'
 import { StandardLayout } from 'easy-email-extensions'
-import type { EditorProps } from './types.ts'
+import type { EditorProps } from './types'
 import EditorToolbar from './ui/EditorToolbar'
 
 const initialValues = {

@@ -1,6 +1,6 @@
-import Editor from './components/Editor'
+import EmailTemplateBuilder from './components/EmailTemplateBuilder'
 import myTemplateJson from './fixtures/test2.json'
-import type { TVariable } from './components/Editor'
+import type { TVariable } from './components/EmailTemplateBuilder'
 import type { IEmailTemplate } from 'easy-email-editor/lib/typings'
 
 const VARIABLES: TVariable[] = [
@@ -23,7 +23,7 @@ const VARIABLES: TVariable[] = [
 
 const App = () => {
   return (
-    <Editor
+    <EmailTemplateBuilder
       data={myTemplateJson as IEmailTemplate}
       variables={VARIABLES}
       height="100vh"

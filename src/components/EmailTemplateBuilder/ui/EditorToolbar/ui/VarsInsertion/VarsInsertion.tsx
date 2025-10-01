@@ -13,9 +13,10 @@ const VarsInsertion = (props: VarsInsertionProps) => {
 
   return (
     <div className={styles.root}>
-      <div>Выбрать переменную для вставки:</div>
+      <label htmlFor="inserted-variable">Выбрать переменную для вставки:</label>
       <select
         className={`${styles.select} ${hasError ? styles.isInvalid : ''}`}
+        id="inserted-variable"
         defaultValue=""
         onPointerDown={(event) => {
           event.stopPropagation()

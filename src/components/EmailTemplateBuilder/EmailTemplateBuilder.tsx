@@ -8,7 +8,7 @@ import {
   EmailEditorProvider,
 } from 'easy-email-editor'
 import { StandardLayout } from 'easy-email-extensions'
-import type { EditorProps } from './types'
+import type { EmailTemplateBuilderProps } from './types'
 import EditorToolbar from './ui/EditorToolbar'
 
 const initialValues = {
@@ -17,7 +17,7 @@ const initialValues = {
   content: BlockManager.getBlockByType(BasicType.PAGE)!.create({}),
 }
 
-const Editor = (props: EditorProps) => {
+const EmailTemplateBuilder = (props: EmailTemplateBuilderProps) => {
   const {
     data = initialValues,
     variables,
@@ -43,4 +43,4 @@ const Editor = (props: EditorProps) => {
   )
 }
 
-export default Editor
+export default EmailTemplateBuilder

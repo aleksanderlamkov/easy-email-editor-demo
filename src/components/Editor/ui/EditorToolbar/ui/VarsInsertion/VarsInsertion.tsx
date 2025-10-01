@@ -1,4 +1,5 @@
 import styles from './VarsInsertion.module.css'
+import { useRef, useState } from 'react'
 import { insertUsingSnapshot, takeSelectionSnapshot } from './utils'
 import type { VarsInsertionProps } from './types'
 
@@ -7,37 +8,56 @@ const VarsInsertion = (props: VarsInsertionProps) => {
     variables,
   } = props
 
+  const [hasError, setHasError] = useState(false)
+  const snapshotRef = useRef<ReturnType<typeof takeSelectionSnapshot> | null>(null)
+
   return (
     <div className={styles.root}>
-      <div>Вставка переменной:</div>
-      <ul className={styles.list}>
-        {variables.map(({ key, sample, name }) => (
-          <li key={key}>
-            <button
-              type="button"
-              title={`Копировать {{${key}}} (${sample})`}
-              onPointerDown={(event) => {
-                event.preventDefault()
-                event.stopPropagation()
+      <div>Выбрать переменную для вставки:</div>
+      <select
+        className={`${styles.select} ${hasError ? styles.isInvalid : ''}`}
+        defaultValue=""
+        onPointerDown={(event) => {
+          event.stopPropagation()
+          snapshotRef.current = takeSelectionSnapshot()
+        }}
+        onChange={(event) => {
+          event.stopPropagation()
 
-                const snapShot = takeSelectionSnapshot()
-                if (!snapShot) {
-                  alert('Курсор не находится внутри текстового блока')
-                  return
-                }
+          const key = event.target.value
+          if (!key) {
+            return
+          }
 
-                insertUsingSnapshot(snapShot, `{{${key}}}`)
-              }}
-              onClick={(event) => {
-                event.preventDefault()
-                event.stopPropagation()
-              }}
-            >
-              {name}
-            </button>
-          </li>
+          const snapshot = snapshotRef.current || takeSelectionSnapshot()
+
+          if (!snapshot) {
+            event.currentTarget.value = ''
+            setHasError(true)
+            setTimeout(() => setHasError(false), 2000)
+            return
+          }
+
+          insertUsingSnapshot(snapshot, `{{${key}}}`)
+          event.currentTarget.value = ''
+          snapshotRef.current = null
+        }}
+      >
+        <option value="" disabled>{`{{VAR}}`}</option>
+
+        {variables.map(({ key, name, sample }) => (
+          <option
+            key={key}
+            value={key}
+            title={sample ? `Пример: ${sample}` : undefined}
+          >
+            {name}{sample ? ` (${sample})` : ''}
+          </option>
         ))}
-      </ul>
+      </select>
+      <div className={`${styles.error} ${hasError ? styles.isVisible : ''}`}>
+        Курсор не находится внутри текстового блока!
+      </div>
     </div>
   )
 }

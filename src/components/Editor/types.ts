@@ -1,20 +1,12 @@
 import type { TVariable } from './ui/EditorToolbar'
-
-export type EasyEmailNode = {
-  type: string
-  data?: { value?: Record<string, unknown> }
-  attributes?: Record<string, unknown>
-  children?: EasyEmailNode[]
-}
-
-export type EasyEmailValues = {
-  subject?: string
-  subTitle?: string
-  content: EasyEmailNode
-}
+import type {
+  ExportActionsProps
+} from './ui/EditorToolbar/ui/ExportActions'
+import type { IEmailTemplate } from 'easy-email-editor/lib/typings'
 
 export type EditorProps = {
-  data?: EasyEmailValues
+  data?: IEmailTemplate
   variables?: TVariable[]
   height?: string
+  onSave?: ExportActionsProps['onSave'],
 }

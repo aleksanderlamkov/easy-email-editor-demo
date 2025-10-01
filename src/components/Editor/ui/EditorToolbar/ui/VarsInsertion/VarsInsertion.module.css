@@ -1,15 +1,29 @@
 .root {
-  display: grid;
-  row-gap: 8px;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
   padding: 12px;
 }
 
-.list {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-block: 0;
-  padding-left: 0;
-  list-style: none;
+.select {
+  width: 80px;
+  height: 30px;
+  font: inherit;
+  border: 1px solid #000000;
+  border-radius: 4px;
+
+  &.isInvalid {
+    border-color: #FF0000;
+  }
+}
+
+.error {
+  max-width: 40%;
+  font-size: 0.8em;
+  line-height: 1;
+  color: #FF0000;
+
+  &:not(.isVisible) {
+    display: none;
+  }
 }

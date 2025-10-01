@@ -22,6 +22,7 @@ const Editor = (props: EditorProps) => {
     data = initialValues,
     variables,
     height = '100vh',
+    onSave,
   } = props
 
   return (
@@ -34,7 +35,7 @@ const Editor = (props: EditorProps) => {
       {() => (
         // @ts-expect-error categories optional at runtime, defaults are used
         <StandardLayout showSourceCode>
-          <EditorToolbar variables={variables} />
+          <EditorToolbar variables={variables} onSave={onSave} />
           <EmailEditor />
         </StandardLayout>
       )}

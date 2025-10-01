@@ -4,7 +4,10 @@ import ExportActions from './ui/ExportActions'
 import type { EditorToolbarProps } from './types'
 
 const EditorToolbar = (props: EditorToolbarProps) => {
-  const { variables = [] } = props
+  const {
+    variables = [],
+    onSave,
+  } = props
 
   const samplesMap = useMemo(
     () => Object.fromEntries(variables.map(({ key, sample }) => [key, sample])),
@@ -13,7 +16,7 @@ const EditorToolbar = (props: EditorToolbarProps) => {
 
   return (
     <>
-      <ExportActions  samplesMap={samplesMap} />
+      <ExportActions samplesMap={samplesMap} onSave={onSave} />
       {variables.length > 0 && <VarsInsertion variables={variables} />}
     </>
   )

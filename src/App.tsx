@@ -1,6 +1,7 @@
-import Editor, { type EasyEmailValues } from './components/Editor'
+import Editor from './components/Editor'
 import myTemplateJson from './fixtures/test2.json'
 import type { TVariable } from './components/Editor'
+import type { IEmailTemplate } from 'easy-email-editor/lib/typings'
 
 const VARIABLES: TVariable[] = [
   {
@@ -23,9 +24,12 @@ const VARIABLES: TVariable[] = [
 const App = () => {
   return (
     <Editor
-      data={myTemplateJson as EasyEmailValues}
+      data={myTemplateJson as IEmailTemplate}
       variables={VARIABLES}
       height="100vh"
+      onSave={(values) => {
+        console.debug('values:', values)
+      }}
     />
   )
 }

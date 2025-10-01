@@ -8,6 +8,7 @@ import type { ExportActionsProps } from './types'
 const ExportActions = (props: ExportActionsProps) => {
   const {
     samplesMap,
+    onSave,
   } = props
 
   const { formState } = useEditorContext()
@@ -26,8 +27,7 @@ const ExportActions = (props: ExportActionsProps) => {
   const exportMJML = () => {
     const mjml = JsonToMjml({
       data: values.content,
-      mode: 'production',
-      context: undefined,
+      mode: 'production'
     })
 
     download('template.mjml', mjml, 'application/xml')
@@ -36,8 +36,7 @@ const ExportActions = (props: ExportActionsProps) => {
   const exportHTML = () => {
     const mjml = JsonToMjml({
       data: values.content,
-      mode: 'production',
-      context: undefined,
+      mode: 'production'
     })
     const { html, errors } = mjml2html(mjml, { minify: true })
 
@@ -79,6 +78,11 @@ const ExportActions = (props: ExportActionsProps) => {
         <li>
           <button type="button" onClick={previewHTML}>Preview</button>
         </li>
+        {onSave && (
+          <li>
+            <button type="button" onClick={() => onSave(values)}>Save</button>
+          </li>
+        )}
       </ul>
     </div>
   )

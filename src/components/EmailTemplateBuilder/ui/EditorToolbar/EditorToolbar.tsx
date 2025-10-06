@@ -9,10 +9,9 @@ const EditorToolbar = (props: EditorToolbarProps) => {
     onSave,
   } = props
 
-  const samplesMap = useMemo(
-    () => Object.fromEntries(variables.map(({ key, sample }) => [key, sample])),
-    [],
-  )
+  const samplesMap = useMemo(() => {
+    return Object.fromEntries(variables.map(({ key, sample }) => [key, sample]))
+  }, [variables])
 
   return (
     <>

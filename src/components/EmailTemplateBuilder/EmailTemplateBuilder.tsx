@@ -1,3 +1,4 @@
+import styles from './EmailTemplateBuilder.module.css'
 import 'easy-email-editor/lib/style.css'
 import 'easy-email-extensions/lib/style.css'
 import '@arco-themes/react-easy-email-theme/css/arco.css'
@@ -26,20 +27,22 @@ const EmailTemplateBuilder = (props: EmailTemplateBuilderProps) => {
   } = props
 
   return (
-    <EmailEditorProvider
-      data={data}
-      height={height}
-      autoComplete
-      dashed={false}
-    >
-      {() => (
-        // @ts-expect-error categories optional at runtime, defaults are used
-        <StandardLayout showSourceCode>
-          <EditorToolbar variables={variables} onSave={onSave} />
-          <EmailEditor />
-        </StandardLayout>
-      )}
-    </EmailEditorProvider>
+    <div className={styles.root}>
+      <EmailEditorProvider
+        data={data}
+        height={height}
+        autoComplete
+        dashed={false}
+      >
+        {() => (
+          // @ts-expect-error categories optional at runtime, defaults are used
+          <StandardLayout showSourceCode>
+            <EditorToolbar variables={variables} onSave={onSave} />
+            <EmailEditor />
+          </StandardLayout>
+        )}
+      </EmailEditorProvider>
+    </div>
   )
 }
 
